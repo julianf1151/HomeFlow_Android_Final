@@ -39,6 +39,8 @@ import java.nio.ByteOrder;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothGatt bluetoothGatt;
     private int hrBuffers = 0;
+    private FirebaseFirestore db;
     private BluetoothGattCharacteristic txCharacteristic, rxCharacteristic;
     private TextView bmeTempView, bmePresView, bmeHumView, bmeGasView, hrView, confidenceView, bloodOxView, bodyTempView, yellowButtonView, blueButtonView, alsView, uvsView, memsMicView;
     private SwitchCompat ledControlSwitch;
@@ -62,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Firestore
+        db = FirebaseFirestore.getInstance();
 
         // UI elements initialization
         bmeTempView = findViewById(R.id.bmeTemp);
